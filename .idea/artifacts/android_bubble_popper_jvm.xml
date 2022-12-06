@@ -1,0 +1,6 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="android_bubble_popper-jvm">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="android_bubble_popper-jvm.jar" />
+  </artifact>
+</component>
