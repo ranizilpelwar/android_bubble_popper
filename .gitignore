@@ -11,6 +11,13 @@
 # Gradle
 .idea/**/gradle.xml
 .idea/**/libraries
+.gradle/7.5/dependencies-accessors/dependencies-accessors.lock
+.gradle/7.5/executionHistory/
+.gradle/7.5/fileHashes/fileHashes.bin
+.gradle/7.5/fileHashes/fileHashes.lock
+.gradle/buildOutputCleanup/buildOutputCleanup.lock
+.gradle/buildOutputCleanup/outputFiles.bin
+.gradle/file-system.probe
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
