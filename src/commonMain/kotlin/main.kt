@@ -1,13 +1,31 @@
 
-import com.soywiz.korge.Korge
-import com.soywiz.korge.input.mouse
+import com.soywiz.klock.*
+import com.soywiz.korev.*
+import com.soywiz.korge.*
+import com.soywiz.korge.animate.*
+import com.soywiz.korge.input.*
+import com.soywiz.korge.service.storage.*
+import com.soywiz.korge.tween.*
+import com.soywiz.korge.ui.*
 import com.soywiz.korge.view.*
-import com.soywiz.korim.color.Colors
-import com.soywiz.korim.color.RGBA
-import com.soywiz.korim.font.readBitmapFont
+import com.soywiz.korim.color.*
+import com.soywiz.korim.font.*
+import com.soywiz.korim.format.*
 import com.soywiz.korim.text.TextAlignment
-import com.soywiz.korio.file.std.resourcesVfs
-import com.soywiz.korma.geom.Rectangle
+import com.soywiz.korio.async.*
+import com.soywiz.korio.async.ObservableProperty
+import com.soywiz.korio.file.std.*
+import com.soywiz.korma.geom.*
+import com.soywiz.korma.geom.vector.*
+import com.soywiz.korma.interpolation.*
+import kotlin.collections.set
+import kotlin.properties.*
+import kotlin.random.*
+
+var cellSize: Double = 0.0
+var fieldSize: Double = 0.0
+var leftIndent: Double = 0.0
+var topIndent: Double = 0.0
 
 suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = RGBA(253, 247, 240)) {
     val font = resourcesVfs["clear_sans.fnt"].readBitmapFont()
@@ -36,6 +54,16 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
         alignTopToTopOf(bgBest)
     }
 
+    graphics {
+        fill(Colors["#cec0b2"]) {
+            for (i in 0..3) {
+                for (j in 0..3) {
+                    roundRect(leftIndent + 10 + (10 + cellSize) * i, topIndent + 10 + (10 + cellSize) * j, cellSize, cellSize, 5.0)
+                }
+            }
+        }
+    }
+
     text("BEST", cellSize * 0.25, RGBA(239, 226, 210), font) {
         centerXOn(bgBest)
         alignTopToTopOf(bgBest, 5.0)
@@ -62,3 +90,7 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
 
     }
 }
+
+fun columnX(number: Int) = leftIndent + 10 + (cellSize + 10) * number
+fun rowY(number: Int) = topIndent + 10 + (cellSize + 10) * number
+
