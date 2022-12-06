@@ -1,1 +1,1 @@
-Experiment with Android development using Kotlin
+Experiment with Android development using KorGE and Kotlin
