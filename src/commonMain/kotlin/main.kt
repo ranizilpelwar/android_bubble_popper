@@ -37,6 +37,8 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
     println("leftIndent: $leftIndent")
     println("topIndent $topIndent")
 
+    val bubbleMap = BubbleMap(4, 4, cellSize, leftIndent, topIndent)
+
     val bgField = roundRect(fieldSize, fieldSize, 5.0, fill = Colors["#b9aea0"]) {
         position(leftIndent, topIndent)
     }
@@ -75,17 +77,14 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
         val y = input.mouse.y
         println("mouse click x: $x")
         println("mouse click y: $y")
-        //find the top left corner of the cell
-        //paint that cell
-    }
-    //fill top left cell
-    roundRect(cellSize, cellSize, 5.0, fill = Colors["#edc403"]) {
-        position(leftIndent + 10, topIndent + 10)
-    }
-
-    //fill bottom right cell
-    roundRect(cellSize, cellSize, 5.0, fill = Colors["#edc403"]) {
-        position(leftIndent + 10 + (10 + cellSize) * 3, topIndent + 10 + (10 + cellSize) * 3)
+        var bubble = bubbleMap.getIntersectingBubbleOrNull(x, y)
+        if (bubble != null) {
+            graphics {
+                fill(Colors["#b9aea0"]) {
+                    circle(bubble.x, bubble.y, bubble.radius)
+                }
+            }
+        }
     }
 
     text("BEST", cellSize * 0.25, RGBA(239, 226, 210), font) {

@@ -12,7 +12,13 @@ class BubbleMap(
     init {
         for (i in 0 until columns) {
             for (j in 0 until rows) {
-                bubbles.add(Bubble(leftIndent + 57 + (10 + cellSize) * i, topIndent + 57 + (10 + cellSize) * j, cellSize/2))
+                bubbles.add(
+                    Bubble(
+                        leftIndent + 57 + (10 + cellSize) * i,
+                        topIndent + 57 + (10 + cellSize) * j,
+                        cellSize / 2
+                    )
+                )
             }
         }
     }
