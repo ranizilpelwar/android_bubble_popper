@@ -1,6 +1,6 @@
 import java.lang.Math.sqrt
 
-class Bubble(private val x: Double, private val y: Double, private val radius: Double) {
+class Bubble(val x: Double, val y: Double, private val radius: Double) {
     // X and Y are the center of the circle
 
     private var isPopped: Boolean = false;

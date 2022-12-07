@@ -30,9 +30,12 @@ var topIndent: Double = 0.0
 suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = RGBA(253, 247, 240)) {
     val font = resourcesVfs["clear_sans.fnt"].readBitmapFont()
     val cellSize = views.virtualWidth / 5.0
+    println("cellSize $cellSize")
     val fieldSize = 50 + 4 * cellSize
     val leftIndent = (views.virtualWidth - fieldSize) / 2
     val topIndent = 150.0
+    println("leftIndent: $leftIndent")
+    println("topIndent $topIndent")
 
     val bgField = roundRect(fieldSize, fieldSize, 5.0, fill = Colors["#b9aea0"]) {
         position(leftIndent, topIndent)
@@ -70,6 +73,8 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
         val input = views.input
         val x = input.mouse.x
         val y = input.mouse.y
+        println("mouse click x: $x")
+        println("mouse click y: $y")
         //find the top left corner of the cell
         //paint that cell
     }
