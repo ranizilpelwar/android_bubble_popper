@@ -4,6 +4,7 @@ import com.soywiz.korau.sound.readSound
 import com.soywiz.korev.*
 import com.soywiz.korge.*
 import com.soywiz.korge.animate.*
+import com.soywiz.korge.component.removeFromView
 import com.soywiz.korge.input.*
 import com.soywiz.korge.service.storage.*
 import com.soywiz.korge.tween.*
@@ -29,6 +30,7 @@ var leftIndent: Double = 0.0
 var topIndent: Double = 0.0
 var playSounds: Boolean = true
 var font: BitmapFont by Delegates.notNull()
+var circles: MutableList<Unit> = mutableListOf()
 
 suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = RGBA(253, 247, 240)) {
     font = resourcesVfs["clear_sans.fnt"].readBitmapFont()
@@ -47,8 +49,7 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
         touchBubbleWrapSound.play()
     }
 
-    var bubbleMap = BubbleMap(4, 4, cellSize, leftIndent, topIndent)
-    var bubblesLeftToPop = bubbleMap.getBubbles().size
+
 
     val bgField = roundRect(fieldSize, fieldSize, 5.0, fill = ColorsTheme.BACKGROUND) {
         position(leftIndent, topIndent)
@@ -76,12 +77,20 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
             for (i in 0..3) {
                 for (j in 0..3) {
                     //roundRect(leftIndent + 10 + (10 + cellSize) * i, topIndent + 10 + (10 + cellSize) * j, cellSize, cellSize, 5.0)
-                    circle(leftIndent + 57 + (10 + cellSize) * i, topIndent + 57 + (10 + cellSize) * j, cellSize/2)
+                    //val drawnCircle = circle(leftIndent + 57 + (10 + cellSize) * i, topIndent + 57 + (10 + cellSize) * j, cellSize/2)
+                    //circles.add(drawnCircle)
                 }
             }
         }
     }
 
+    var bubbleMap = bubbleMap(4, 4, cellSize, leftIndent, topIndent)
+
+    fun restart() {
+        println("restarted")
+        bubbleMap.removeFromParent()
+        bubbleMap = bubbleMap(4, 4, cellSize, leftIndent, topIndent)
+    }
     //pop a bubble in the cell where the mouse was clicked
     onClick {
         val input = views.input
@@ -89,18 +98,23 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
         val y = input.mouse.y
         println("mouse click x: $x")
         println("mouse click y: $y")
-        if (playSounds) {
-            bubblePopSound.play()
-        }
+
         var bubble = bubbleMap.getIntersectingBubbleOrNull(x, y)
-        if (bubble != null) {
-            bubblesLeftToPop -= 1
-            graphics {
-                fill(ColorsTheme.BUBBLE_INACTIVE) {
-                    circle(bubble.x, bubble.y, bubble.radius)
-                }
+        if (bubble != null && !bubble.isPopped()) {
+            if (playSounds) {
+                bubblePopSound.play()
             }
-            checkIfGameOver()
+            bubble.popIt()
+//            graphics {
+//                fill(ColorsTheme.BUBBLE_INACTIVE) {
+//                    circle(bubble.x, bubble.y, bubble.radius)
+//                }
+//            }
+            bubble.removeFromParent()
+            if (bubbleMap.areAllPopped()) {
+                showGameOver() { restart() }
+
+            }
         }
     }
 
@@ -129,13 +143,10 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
 fun columnX(number: Int) = leftIndent + 10 + (cellSize + 10) * number
 fun rowY(number: Int) = topIndent + 10 + (cellSize + 10) * number
 
-fun Container.restart() {
-println("restarted")
 
-}
 
 fun Stage.checkIfGameOver() {
-    showGameOver() { restart() }
+
 }
 
 fun Container.showGameOver(onRestart: () -> Unit) = container {
