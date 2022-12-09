@@ -37,4 +37,13 @@ class BubbleMapTest : ViewsForTesting() {
 
         assertFalse(result)
     }
+
+    @Test
+    fun testAreAllPoppedIsTrueAtTheEnd() {
+        val bubbleMap = BubbleMap(4, 4, 96.0, 23.0, 150.0)
+        bubbleMap.getBubbles().forEach { bubble -> bubble.popIt() }
+        val result = bubbleMap.areAllPopped()
+
+        assertTrue(result)
+    }
 }
