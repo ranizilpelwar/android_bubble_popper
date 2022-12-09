@@ -16,8 +16,8 @@ class BubbleMapTest : ViewsForTesting() {
         val result = bubbleMap.getIntersectingBubbleOrNull(78.0, 206.0)
 
         assertNotNull(result)
-        assertEquals(result.x, 23.0 + 57.0)
-        assertEquals(result.y, 150.0 + 57.0)
+        assertEquals(result.x, 23.0 + 7.0)
+        assertEquals(result.y, 150.0 + 7.0)
     }
 
     @Test
@@ -26,7 +26,15 @@ class BubbleMapTest : ViewsForTesting() {
         val result = bubbleMap.getIntersectingBubbleOrNull(285.0, 334.0)
 
         assertNotNull(result)
-        assertEquals(result.x, 23.0 + 57.0 + (10 + 96) * 2)
-        assertEquals(result.y, 150.0 + 57.0 + (10 + 96) * 1)
+        assertEquals(result.x, 23.0 + 7.0 + (10 + 96) * 2)
+        assertEquals(result.y, 150.0 + 7.0 + (10 + 96) * 1)
+    }
+
+    @Test
+    fun testAreAllPoppedIsFalseInTheBeginning() {
+        val bubbleMap = BubbleMap(4, 4, 96.0, 23.0, 150.0)
+        val result = bubbleMap.areAllPopped()
+
+        assertFalse(result)
     }
 }

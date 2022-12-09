@@ -37,7 +37,7 @@ class BubbleMap(
     }
 
     fun areAllPopped(): Boolean {
-        return true
+        return false
     }
 
 }
