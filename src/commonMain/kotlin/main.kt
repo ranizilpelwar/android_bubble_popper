@@ -60,15 +60,15 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
     }
     text("GO!", cellSize * 0.5, Colors.WHITE, font).centerOn(bgLogo)
 
-    val bgBest = roundRect(cellSize * 1.5, cellSize * 0.8, 5.0, fill = ColorsTheme.BEST_SCORE) {
-        alignRightToRightOf(bgField)
-        alignTopToTopOf(bgLogo)
-    }
-
-    val bgScore = roundRect(cellSize * 1.5, cellSize * 0.8, 5.0, fill = ColorsTheme.SCORE) {
-        alignRightToLeftOf(bgBest, 24)
-        alignTopToTopOf(bgBest)
-    }
+//    val bgBest = roundRect(cellSize * 1.5, cellSize * 0.8, 5.0, fill = ColorsTheme.BEST_SCORE) {
+//        alignRightToRightOf(bgField)
+//        alignTopToTopOf(bgLogo)
+//    }
+//
+//    val bgScore = roundRect(cellSize * 1.5, cellSize * 0.8, 5.0, fill = ColorsTheme.SCORE) {
+//        alignRightToLeftOf(bgBest, 24)
+//        alignTopToTopOf(bgBest)
+//    }
 
 
     // 4 x 4 grid of bubbles
@@ -118,26 +118,26 @@ suspend fun main() = Korge(width = 480, height = 640, title = "2048", bgcolor = 
         }
     }
 
-    text("BEST", cellSize * 0.25, ColorsTheme.TEXT_LABEL, font) {
-        centerXOn(bgBest)
-        alignTopToTopOf(bgBest, 5.0)
-    }
-    text("0", cellSize * 0.5, ColorsTheme.TEXT_VALUE, font) {
-        setTextBounds(Rectangle(0.0, 0.0, bgBest.width, cellSize - 24.0))
-        alignment = TextAlignment.MIDDLE_CENTER
-        alignTopToTopOf(bgBest, 12.0)
-        centerXOn(bgBest)
-    }
-    text("SCORE", cellSize * 0.25, ColorsTheme.TEXT_LABEL, font) {
-        centerXOn(bgScore)
-        alignTopToTopOf(bgScore, 5.0)
-    }
-    text("0", cellSize * 0.5, Colors.WHITE, font) {
-        setTextBounds(Rectangle(0.0, 0.0, bgScore.width, cellSize - 24.0))
-        alignment = TextAlignment.MIDDLE_CENTER
-        centerXOn(bgScore)
-        alignTopToTopOf(bgScore, 12.0)
-    }
+//    text("BEST", cellSize * 0.25, ColorsTheme.TEXT_LABEL, font) {
+//        centerXOn(bgBest)
+//        alignTopToTopOf(bgBest, 5.0)
+//    }
+//    text("0", cellSize * 0.5, ColorsTheme.TEXT_VALUE, font) {
+//        setTextBounds(Rectangle(0.0, 0.0, bgBest.width, cellSize - 24.0))
+//        alignment = TextAlignment.MIDDLE_CENTER
+//        alignTopToTopOf(bgBest, 12.0)
+//        centerXOn(bgBest)
+//    }
+//    text("SCORE", cellSize * 0.25, ColorsTheme.TEXT_LABEL, font) {
+//        centerXOn(bgScore)
+//        alignTopToTopOf(bgScore, 5.0)
+//    }
+//    text("0", cellSize * 0.5, Colors.WHITE, font) {
+//        setTextBounds(Rectangle(0.0, 0.0, bgScore.width, cellSize - 24.0))
+//        alignment = TextAlignment.MIDDLE_CENTER
+//        centerXOn(bgScore)
+//        alignTopToTopOf(bgScore, 12.0)
+//    }
 }
 
 fun columnX(number: Int) = leftIndent + 10 + (cellSize + 10) * number
@@ -159,11 +159,11 @@ fun Container.showGameOver(onRestart: () -> Unit) = container {
 
     roundRect(fieldSize, fieldSize, 5.0, fill = Colors["#FFFFFF33"])
     text("Game Over", 60.0, Colors.BLACK, font) {
-        centerBetween(500.0, 500.0, fieldSize, fieldSize)
+        centerBetween(550.0, 200.0, fieldSize, fieldSize)
         y -= 60
     }
     uiText("Play again?", 120.0, 35.0) {
-        centerBetween(500.0, 500.0, fieldSize, fieldSize)
+        centerBetween(530.0, 180.0, fieldSize, fieldSize)
         y += 20
         textSize = 40.0
         textFont = font
