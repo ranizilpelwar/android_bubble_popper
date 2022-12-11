@@ -19,6 +19,7 @@
 .gradle/buildOutputCleanup/buildOutputCleanup.lock
 .gradle/buildOutputCleanup/outputFiles.bin
 .gradle/file-system.probe
+.gradle/7.5/fileHashes/
 
 # Gradle and Maven with auto-import
 # When using Gradle or Maven with auto-import, you should exclude module files,
